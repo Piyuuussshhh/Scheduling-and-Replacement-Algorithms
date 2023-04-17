@@ -11,6 +11,8 @@ private:
     int waitTime;
 public:
     Process(int id, int aT, int bT);
+    bool operator ==(Process *p2);
+
     int getId();
     int getArrivalTime();
     int getBurstTime();

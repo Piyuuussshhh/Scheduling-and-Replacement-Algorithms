@@ -23,6 +23,9 @@ int main() {
     }
 
     sort(processes.begin(), processes.end(), [](Process *p1, Process *p2) {
+        if (p1 -> getArrivalTime() == p2 -> getArrivalTime()) {
+            return p1 -> getBurstTime() < p2 -> getBurstTime();
+        }
         return p1 -> getArrivalTime() < p2 -> getArrivalTime();
     });
 
@@ -40,4 +43,14 @@ int main() {
     }
 
     printTable();
+
+    float avgWT = 0;
+    float avgTAT = 0;
+    for (auto i: processes) {
+        avgWT += (float) i -> getWaitTime() / processes.size();
+        avgTAT += (float) i -> getTurnAroundTime() / processes.size();
+    }
+
+    std::cout << "Average wait time: " << avgWT << std::endl
+              << "Average turnaround time: " << avgTAT << std::endl;
 }
