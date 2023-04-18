@@ -8,14 +8,22 @@ std::vector<Process *> processes;
 inline void printProcesses() {for (auto i: processes) std::cout << i -> getId() << std::endl;}
 
 void printTable(std::vector<Process *> p = processes) {
-    std::cout << "PROCESS\tARRIVAL TIME\tBURST TIME\tCOMPLETION TIME\tTURNAROUND TIME\tWAIT TIME" << std::endl;
+    std::cout << "PRIORITY\tPROCESS\tARRIVAL TIME\tBURST TIME\tCOMPLETION TIME\tTURNAROUND TIME\tWAIT TIME" << std::endl;
     for (auto i: p) {
-        std::cout << i -> getId() << "\t" << i -> getArrivalTime() << "\t\t" << i -> getBurstTime() << "\t\t" << i -> getCompletionTime() << "\t\t" << i -> getTurnAroundTime() << "\t\t" << i -> getWaitTime() << std::endl;
+        std::cout << i -> getPriority() << i -> getId() << "\t" << i -> getArrivalTime() << "\t\t" << i -> getBurstTime() << "\t\t" << i -> getCompletionTime() << "\t\t" << i -> getTurnAroundTime() << "\t\t" << i -> getWaitTime() << std::endl;
     }
 }
 
 Process::Process(int id, int aT, int bT)
     : id(id), arrivalTime(aT), burstTime(bT) {
+    completionTime = 0;
+    turnAroundTime = 0;
+    waitTime = 0;
+    priority = 0;
+}
+
+Process::Process(int id, int aT, int bT, int priority)
+    : id(id), arrivalTime(aT), burstTime(bT), priority(priority) {
     completionTime = 0;
     turnAroundTime = 0;
     waitTime = 0;
@@ -50,6 +58,10 @@ int Process::getTurnAroundTime() {
 
 int Process::getWaitTime() {
     return waitTime;
+}
+
+int Process::getPriority() {
+    return priority;
 }
 
 void Process::setCompletionTime(int time) {

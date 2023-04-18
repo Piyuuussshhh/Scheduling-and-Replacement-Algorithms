@@ -9,8 +9,10 @@ private:
     int completionTime;
     int turnAroundTime;
     int waitTime;
+    int priority;
 public:
     Process(int id, int aT, int bT);
+    Process(int id, int aT, int bT, int priority);
     bool operator ==(Process *p2);
 
     int getId();
@@ -19,6 +21,7 @@ public:
     int getCompletionTime();
     int getTurnAroundTime();
     int getWaitTime();
+    int getPriority();
 
     void setCompletionTime(int);
     void calculateTAT();
