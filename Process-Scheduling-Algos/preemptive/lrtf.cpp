@@ -30,38 +30,38 @@ int main() {
 
     int totalTime = 0;
     int completedProcesses = 0;
-    int minIndex;
+    int maxIndex;
 
     while (completedProcesses != numOfProcesses) {
-        minIndex = -1;
-        int minBurstTime = INT_MAX;
+        maxIndex = -1;
+        int maxBurstTime = INT_MIN;
 
         // This for loop finds the process with the minimum burst time that has arrived till now.
         for (int i = 0; i < numOfProcesses; i++) {
             if (
                 processes[i] -> getArrivalTime() <= totalTime &&
-                remainingBT[i] < minBurstTime &&
+                remainingBT[i] > maxBurstTime &&
                 !isCompleted[i]
             ) {
-                minIndex = i;
-                minBurstTime = remainingBT[i];
+                maxIndex = i;
+                maxBurstTime = remainingBT[i];
             }
         }
 
-        if (minIndex == -1) {
+        if (maxIndex == -1) {
             totalTime++;
         } else {
-            remainingBT[minIndex]--;
+            remainingBT[maxIndex]--;
             totalTime++;
 
-            if (remainingBT[minIndex] == 0) {
+            if (remainingBT[maxIndex] == 0) {
                 completedProcesses++;
-                processes[minIndex] -> setCompletionTime(totalTime);
+                processes[maxIndex] -> setCompletionTime(totalTime);
 
-                processes[minIndex] -> calculateTAT();
-                processes[minIndex] -> calculateWT();
+                processes[maxIndex] -> calculateTAT();
+                processes[maxIndex] -> calculateWT();
 
-                isCompleted[minIndex] = true;
+                isCompleted[maxIndex] = true;
             }
         }
     }
