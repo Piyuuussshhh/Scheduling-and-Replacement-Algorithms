@@ -8,9 +8,9 @@ std::vector<Process *> processes;
 inline void printProcesses() {for (auto i: processes) std::cout << i -> getId() << std::endl;}
 
 void printTable(std::vector<Process *> p = processes) {
-    std::cout << "PRIORITY\tPROCESS\tARRIVAL TIME\tBURST TIME\tCOMPLETION TIME\tTURNAROUND TIME\tWAIT TIME" << std::endl;
+    std::cout << "PRIORITY\tPROCESS\t\tARRIVAL TIME\tBURST TIME\tCOMPLETION TIME\tTURNAROUND TIME\tWAIT TIME" << std::endl;
     for (auto i: p) {
-        std::cout << i -> getPriority() << i -> getId() << "\t" << i -> getArrivalTime() << "\t\t" << i -> getBurstTime() << "\t\t" << i -> getCompletionTime() << "\t\t" << i -> getTurnAroundTime() << "\t\t" << i -> getWaitTime() << std::endl;
+        std::cout << i -> getPriority() << "\t\t" << i -> getId() << "\t\t" << i -> getArrivalTime() << "\t\t" << i -> getBurstTime() << "\t\t" << i -> getCompletionTime() << "\t\t" << i -> getTurnAroundTime() << "\t\t" << i -> getWaitTime() << std::endl;
     }
 }
 
